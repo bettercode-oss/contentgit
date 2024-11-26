@@ -15,6 +15,7 @@ PGMQ 사용에 대한 자세한 내용은 ['트랜잭셔널 메시징에도, 그
 ## 시작하기
 
 1. Go 설치
+
 Go는 1.23.3 버전을 사용합니다.
 
 https://go.dev/doc/install
@@ -26,6 +27,7 @@ go mod download
 ```
 
 3. Postgres 설치
+
 아래 도커 명령어로 Postgres 컨테이너를 실행합니다.
 
 ```bash
@@ -33,10 +35,12 @@ docker run -d --name pgmq-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 te
 ```
 
 4. 데이터베이스 생성
+
 psql 이나 pgAdmin 등으로 데이터베이스에 접속하여 아래 SQL을 실행합니다.
 [create_database.sql](script/database/create_database.sql)
 
-5. 실행
+6. 실행
+
 ```bash
 export DB_PASSWORD=postgres
 go run main.go
