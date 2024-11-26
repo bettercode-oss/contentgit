@@ -3,13 +3,14 @@
 ContentGit은 컨텐츠 저장소로 Git 처럼 컨텐츠를 관리하며 REST API를 제공합니다.
 
 ContentGit은 핵사고날 아키텍처와 이벤트 소싱을 사용합니다.
-기술 스택을 단순화하기 위해 MessageQueue 는 PostgreSQL을 확장한 [PGMQ](https://github.com/tembo-io/pgmq)를 사용합니다.
-PGMQ 사용에 대한 자세한 내용은 ['트랜잭셔널 메시징에도, 그냥 PostgreSQL 쓰세요'](https://yozm.wishket.com/magazine/detail/2833/)을 참조하세요.
 
+![image](https://github.com/user-attachments/assets/2e17e06d-0c74-49f0-8d47-3c9ab09ed6c8)
 ![image](https://github.com/user-attachments/assets/306af8c0-9ebd-42c7-be01-5cd9fad60442)
 
+이미지 출처 : Micoservices Patterns
 
-
+기술 스택을 단순화하기 위해 MessageQueue 는 PostgreSQL을 확장한 [PGMQ](https://github.com/tembo-io/pgmq)를 사용합니다.
+PGMQ 사용에 대한 자세한 내용은 ['트랜잭셔널 메시징에도, 그냥 PostgreSQL 쓰세요'](https://yozm.wishket.com/magazine/detail/2833/)을 참조하세요.
 
 ## 시작하기
 
