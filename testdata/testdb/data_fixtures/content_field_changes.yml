@@ -1,0 +1,12 @@
+- id: 1
+  content_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  name: "name"
+  content: {"afterValue": "최신형 공기 살균기", "beforeValue": "살균기", "createdById": "1", "createdByName": "사이트 관리자"}
+  created_at: "1982-01-04 00:00"
+  updated_at: "1982-01-04 00:00"
+- id: 2
+  content_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  name: "name"
+  content: {"afterValue": "2024 최신형 공기 살균기", "beforeValue": "최신형 공기 살균기", "createdById": "2", "createdByName": "김영희"}
+  created_at: "1982-01-06 00:00"
+  updated_at: "1982-01-06 00:00"

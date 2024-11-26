@@ -1,0 +1,72 @@
+- id: 1
+  tenant_id: "bettercode"
+  aggregate_id: "074c7322-e7fa-4d5c-8938-8dbe0ce67465"
+  aggregate_type: "Content"
+  event_type: "CONTENT_CREATED_V1"
+  data: {"content":{"name":"불스원샷","mainImage":"https://gdimg.gmarket.co.kr/2367233519/still/280?ver=1645526559","price":"250000","taxRate":"10.2"}}
+  version: 1
+  updated_at: '1982-01-04 00:00'
+  created_at: '1982-01-04 00:00'
+- id: 2
+  tenant_id: "bettercode"
+  aggregate_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  aggregate_type: "Content"
+  event_type: "CONTENT_CREATED_V1"
+  data: {"content":{"name":"이지듀 멜라토닝 원데이 앰플 대용량 28ml","mainImage":"https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/5966707693/B.jpg?920000000","price":"3000","taxRate":"10.2","liveShowInventoryQuantity":"2000"}}
+  version: 1
+  updated_at: '1982-01-05 00:00'
+  created_at: '1982-01-05 00:00'
+- id: 3
+  tenant_id: "yuren"
+  aggregate_id: "03ab7edb-881b-49f8-848a-3e8266376ffe"
+  aggregate_type: "Content"
+  event_type: "CONTENT_CREATED_V1"
+  data: {"content":{"name":"링셀 수분 단백질 크림"}}
+  version: 1
+  updated_at: '1982-01-04 00:00'
+  created_at: '1982-01-04 00:00'
+- id: 4
+  tenant_id: "bettercode"
+  aggregate_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  aggregate_type: "Content"
+  event_type: "CONTENT_FIELD_UPDATED_V1"
+  data: {"fieldName": "name", "afterValue": "최신형 공기 살균기", "beforeValue": "살균기", "createdById": "1", "createdByName": "사이트 관리자"}
+  version: 2
+  updated_at: '1982-01-04 00:00'
+  created_at: '1982-01-04 00:00'
+- id: 5
+  tenant_id: "bettercode"
+  aggregate_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  aggregate_type: "Content"
+  event_type: "CONTENT_FIELD_COMMENT_ADDED_V1"
+  data: {"comment": "금액 결정되었나요?", fieldName": "price", "createdById": "1", "createdByName": "사이트 관리자"}
+  version: 3
+  updated_at: '1982-01-05 00:00'
+  created_at: '1982-01-05 00:00'
+- id: 6
+  tenant_id: "bettercode"
+  aggregate_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  aggregate_type: "Content"
+  event_type: "CONTENT_FIELD_COMMENT_ADDED_V1"
+  data: {"comment": "네 250000으로 결정되었네요.", fieldName": "price", "createdById": "2", "createdByName": "김영희"}
+  version: 4
+  updated_at: '1982-01-06 00:00'
+  created_at: '1982-01-06 00:00'
+- id: 7
+  tenant_id: "bettercode"
+  aggregate_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  aggregate_type: "Content"
+  event_type: "CONTENT_FIELD_UPDATED_V1"
+  data: {"fieldName": "name", "afterValue": "2024 최신형 공기 살균기", "beforeValue": "최신형 공기 살균기", "createdById": "2", "createdByName": "김영희"}
+  version: 5
+  updated_at: '1982-01-06 00:00'
+  created_at: '1982-01-06 00:00'
+- id: 8
+  tenant_id: "bettercode"
+  aggregate_id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
+  aggregate_type: "Content"
+  event_type: "CONTENT_FIELD_COMMENT_ADDED_V1"
+  data: {"comment": "이미지는 https://gdimg.gmarket.co.kr/2367233519/still/280?ver=1645526559 이것으로 해주세요", fieldName": "mainImage", "createdById": "3", "createdByName": "이수민"}
+  version: 6
+  updated_at: '1982-01-07 00:00'
+  created_at: '1982-01-07 00:00'

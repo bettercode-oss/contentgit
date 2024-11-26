@@ -1,0 +1,7 @@
+HttpPort: 7301
+DataSource:
+  Host: localhost
+  Port: 5432
+  DatabaseName: content_git
+  UserName: postgres
+  Password: ${DB_PASSWORD}
