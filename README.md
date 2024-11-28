@@ -31,7 +31,7 @@ go mod download
 아래 도커 명령어로 Postgres 컨테이너를 실행합니다.
 
 ```bash
-docker run -d --name pgmq-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 tembo.docker.scarf.sh/tembo/pg16-pgmq:latest
+docker run -d --name pgmq-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 bettercode2016/pg16-pgmq:latest
 ```
 
 4. 데이터베이스 생성

@@ -34,7 +34,7 @@ func NewTestDatabaseContainer() (*TestDatabaseContainer, error) {
 	ctx := context.Background()
 	postgresContainer, err := postgres.Run(
 		ctx,
-		"quay.io/tembo/pg16-pgmq",
+		"bettercode2016/pg16-pgmq",
 		postgres.WithInitScripts(filepath.Join(currentDir, "create_database.sql")),
 		postgres.WithUsername(username),
 		postgres.WithPassword(password),
