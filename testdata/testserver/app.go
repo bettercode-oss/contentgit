@@ -5,10 +5,11 @@ import (
 	"contentgit/config"
 	"contentgit/testdata/testdb"
 	"fmt"
+	"net/http"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"net/http"
 )
 
 type TestAppServer struct {
@@ -93,7 +94,7 @@ func NewTestAppServerBuilder(router app.GinRoute, dbContainer *testdb.TestDataba
 	}
 }
 
-func (builder *TestAppServerBuilder) DatabaseFixture() *TestAppServerBuilder {
+func (builder *TestAppServerBuilder) WithDatabaseFixture() *TestAppServerBuilder {
 	builder.dbFixture = true
 	return builder
 }
