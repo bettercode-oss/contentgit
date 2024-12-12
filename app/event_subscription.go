@@ -2,8 +2,8 @@ package app
 
 import (
 	"contentgit/foundation"
+	"contentgit/ports/out/messaging/broker/pgmq"
 	"contentgit/ports/out/persistance/eventsourcing"
-	"contentgit/ports/out/queue/pgmq"
 	"context"
 )
 

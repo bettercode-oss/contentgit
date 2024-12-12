@@ -1,9 +1,9 @@
 package eventsourcing
 
 import (
+	"contentgit/ports/out/messaging/broker"
 	persistence "contentgit/ports/out/persistance"
 	"contentgit/ports/out/persistance/eventsourcing/serializer"
-	"contentgit/ports/out/queue"
 	"context"
 	"time"
 
@@ -12,22 +12,22 @@ import (
 )
 
 type EventConsumer struct {
-	messagingQueue queue.MessagingQueue
-	eventHandler   EventHandler
+	messageBroker broker.MessageBroker
+	eventHandler  EventHandler
 }
 
-func NewEventConsumer(messagingQueue queue.MessagingQueue, eventHandler EventHandler) *EventConsumer {
-	return &EventConsumer{messagingQueue: messagingQueue, eventHandler: eventHandler}
+func NewEventConsumer(messageBroker broker.MessageBroker, eventHandler EventHandler) *EventConsumer {
+	return &EventConsumer{messageBroker: messageBroker, eventHandler: eventHandler}
 }
 
 func (c *EventConsumer) Consume(ctx context.Context) {
-	messageChan := make(chan *queue.MessageEnvelope)
+	messageChan := make(chan *broker.MessageEnvelope)
 	errChan := make(chan error)
 
 	go func() {
 		for {
 			time.Sleep(1 * time.Second)
-			messageEnvelope, err := c.messagingQueue.ReadMessage(ctx, string(c.eventHandler.GetAggregateType()), 30)
+			messageEnvelope, err := c.messageBroker.ReadMessage(ctx, string(c.eventHandler.GetAggregateType()), 30)
 			if err != nil {
 				if errors.Is(err, persistence.ErrRecordNotFound) {
 					continue
@@ -59,7 +59,7 @@ func (c *EventConsumer) Consume(ctx context.Context) {
 				continue
 			}
 
-			_, err = c.messagingQueue.DeleteMessage(ctx, string(c.eventHandler.GetAggregateType()), messageEnvelope.MsgId)
+			_, err = c.messageBroker.DeleteMessage(ctx, string(c.eventHandler.GetAggregateType()), messageEnvelope.MsgId)
 			if err != nil {
 				log.Error(err)
 				continue
