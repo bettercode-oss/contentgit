@@ -74,7 +74,7 @@ func (suite *ContentControllerTestSuite) TestCreateContent() {
 
 func (suite *ContentControllerTestSuite) TestGetContent() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents/6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd", nil)
 	rec := httptest.NewRecorder()
@@ -163,7 +163,7 @@ func (suite *ContentControllerTestSuite) TestGetContent() {
 
 func (suite *ContentControllerTestSuite) TestGetContent_아이디에_해당하는_데이터가_없으면_NotFound를_반환한다() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents/unknown-id", nil)
 	rec := httptest.NewRecorder()
@@ -177,7 +177,7 @@ func (suite *ContentControllerTestSuite) TestGetContent_아이디에_해당하�
 
 func (suite *ContentControllerTestSuite) TestGetContents_페이징() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents?page=1&pageSize=1", nil)
 	rec := httptest.NewRecorder()
@@ -213,7 +213,7 @@ func (suite *ContentControllerTestSuite) TestGetContents_페이징() {
 
 func (suite *ContentControllerTestSuite) TestGetContents_Sort_By_Desc_CreatedAt() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents?page=1&pageSize=2&sortBy=desc(created_at)", nil)
 	rec := httptest.NewRecorder()
@@ -261,7 +261,7 @@ func (suite *ContentControllerTestSuite) TestGetContents_Sort_By_Desc_CreatedAt(
 
 func (suite *ContentControllerTestSuite) TestUpdateContentField() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	requestBody := `{
 			"beforeValue": "불스원샷",
@@ -282,7 +282,7 @@ func (suite *ContentControllerTestSuite) TestUpdateContentField() {
 
 func (suite *ContentControllerTestSuite) TestUpdateContentField_Conflict_Field_Value() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	requestBody := `{
 			"beforeValue": "불스원샷 플러스",
@@ -303,7 +303,7 @@ func (suite *ContentControllerTestSuite) TestUpdateContentField_Conflict_Field_V
 
 func (suite *ContentControllerTestSuite) TestUpdateContentField_NotFound_Field() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	requestBody := `{
 			"beforeValue": "불스원샷 플러스",
@@ -324,7 +324,7 @@ func (suite *ContentControllerTestSuite) TestUpdateContentField_NotFound_Field()
 
 func (suite *ContentControllerTestSuite) TestAddFieldComment() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
 	requestBody := `{
 			"comment": "공기 살균기에 대한 설명",
@@ -344,7 +344,7 @@ func (suite *ContentControllerTestSuite) TestAddFieldComment() {
 
 func (suite *ContentControllerTestSuite) TestAddFieldComment_NotFound_Field() {
 	// given
-	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).DatabaseFixture().Build()
+	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 	requestBody := `{
 		"comment": "공기 살균기에 대한 설명",
 		"createdById": "1",
