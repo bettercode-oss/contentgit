@@ -1,8 +1,9 @@
-package eventsourcing
+package consumer
 
 import (
 	"contentgit/ports/out/messaging/broker"
 	persistence "contentgit/ports/out/persistance"
+	"contentgit/ports/out/persistance/eventsourcing"
 	"contentgit/ports/out/persistance/eventsourcing/serializer"
 	"context"
 	"time"
@@ -47,7 +48,7 @@ func (c *EventConsumer) Consume(ctx context.Context) {
 	for {
 		select {
 		case messageEnvelope := <-messageChan:
-			event := Event{}
+			event := eventsourcing.Event{}
 			err := serializer.Unmarshal(messageEnvelope.Message, &event)
 			if err != nil {
 				log.Error(err)
