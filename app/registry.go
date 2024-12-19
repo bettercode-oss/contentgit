@@ -4,9 +4,9 @@ import (
 	"contentgit/app/cache"
 	"contentgit/appservices"
 	"contentgit/domain/content"
+	"contentgit/ports/out/messaging/broker/pgmq"
 	"contentgit/ports/out/persistance/eventsourcing"
 	"contentgit/ports/out/persistance/rdb"
-	"contentgit/ports/out/queue/pgmq"
 )
 
 type ComponentRegistry struct {

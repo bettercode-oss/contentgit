@@ -2,10 +2,10 @@ package pgmq
 
 import (
 	"contentgit/foundation"
+	"contentgit/ports/out/messaging/broker"
 	persistence "contentgit/ports/out/persistance"
 	"contentgit/ports/out/persistance/eventsourcing"
 	"contentgit/ports/out/persistance/eventsourcing/serializer"
-	"contentgit/ports/out/queue"
 	"context"
 
 	"github.com/pkg/errors"
@@ -57,12 +57,12 @@ func (e *PostgresMessagingQueue) PublishMessage(ctx context.Context, queueName, 
 	return nil
 }
 
-func (e *PostgresMessagingQueue) ReadMessage(ctx context.Context, queueName string, vt uint) (*queue.MessageEnvelope, error) {
+func (e *PostgresMessagingQueue) ReadMessage(ctx context.Context, queueName string, vt uint) (*broker.MessageEnvelope, error) {
 	if vt == 0 {
 		vt = vtDefault
 	}
 
-	var messageEnvelope queue.MessageEnvelope
+	var messageEnvelope broker.MessageEnvelope
 	db := foundation.ContextProvider().GetDB(ctx)
 
 	if err := db.Raw("SELECT * FROM pgmq.read(?, ?, ?)", queueName, vt, 1).Scan(&messageEnvelope).Error; err != nil {
