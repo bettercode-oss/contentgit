@@ -15,6 +15,7 @@ type ContentProjection struct {
 	Id            string                `gorm:"primarykey"`
 	TenantId      string                `gorm:"not null"`
 	Content       persistence.JSONB     `gorm:"type:jsonb"`
+	ContentType   string                `gorm:"type:varchar(100)"`
 	FieldChanges  []ContentFieldChange  `gorm:"foreignKey:ContentId"`
 	FieldComments []ContentFieldComment `gorm:"foreignKey:ContentId"`
 	Version       uint
@@ -23,8 +24,14 @@ type ContentProjection struct {
 	DeletedAt     gorm.DeletedAt `gorm:"index"`
 }
 
-func NewContentProjection(id string, tenantId string, content map[string]any, version uint) ContentProjection {
-	return ContentProjection{Id: id, TenantId: tenantId, Content: content, Version: version}
+func NewContentProjection(id string, tenantId string, content map[string]any, contentType string, version uint) ContentProjection {
+	return ContentProjection{
+		Id:          id,
+		TenantId:    tenantId,
+		Content:     content,
+		ContentType: contentType,
+		Version:     version,
+	}
 }
 
 func (*ContentProjection) TableName() string {
