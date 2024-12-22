@@ -48,6 +48,21 @@ func TestNewContentAggregate(t *testing.T) {
 		assert.Equal(t, aggregateId, aggregate.GetID())
 		assert.Equal(t, tenantId, aggregate.GetTenantId())
 	})
+
+	t.Run("contentType을 선택적으로 추가할 수 있다", func(t *testing.T) {
+		// given
+		aggregateId := uuid.New().String()
+		tenantId := "bettercode"
+		contentType := "Product"
+
+		// when
+		aggregate, err := NewContentAggregateWithType(aggregateId, tenantId, contentType)
+
+		// then
+		assert.NoError(t, err)
+		assert.NotNil(t, aggregate)
+		assert.Equal(t, contentType, aggregate.ContentType)
+	})
 }
 
 func TestContentAggregate_CreateContent(t *testing.T) {

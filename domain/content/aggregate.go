@@ -15,6 +15,7 @@ const (
 type ContentAggregate struct {
 	*eventsourcing.AggregateBase
 	Content       map[string]any `json:"content"`
+	ContentType   string         `json:"contentType"`
 	FieldComments []FieldComment `json:"fieldComments"`
 }
 
@@ -27,12 +28,24 @@ func NewContentAggregate(id string, tenantId string) (*ContentAggregate, error) 
 		Content:       make(map[string]any),
 		FieldComments: []FieldComment{},
 	}
+
 	aggregateBase := eventsourcing.NewAggregateBase(contentAggregate.When)
 	aggregateBase.SetType(ContentAggregateType)
 	aggregateBase.SetID(id)
 	aggregateBase.SetTenantId(tenantId)
 	contentAggregate.AggregateBase = aggregateBase
+
 	return contentAggregate, nil
+}
+
+func NewContentAggregateWithType(id string, tenantId string, contentType string) (*ContentAggregate, error) {
+	aggregate, err := NewContentAggregate(id, tenantId)
+	if err != nil {
+		return nil, err
+	}
+
+	aggregate.ContentType = contentType
+	return aggregate, nil
 }
 
 func (a *ContentAggregate) CreateContent(ctx context.Context, content map[string]any) error {
