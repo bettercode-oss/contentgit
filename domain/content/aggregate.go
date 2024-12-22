@@ -54,7 +54,8 @@ func (a *ContentAggregate) CreateContent(ctx context.Context, content map[string
 	}
 
 	event := &events.ContentCreatedEventV1{
-		Content: content,
+		Content:     content,
+		ContentType: a.ContentType,
 	}
 
 	return a.Apply(event)
@@ -98,6 +99,7 @@ func (a *ContentAggregate) When(event any) error {
 
 func (a *ContentAggregate) handleContentCreatedEvent(evt *events.ContentCreatedEventV1) error {
 	a.Content = evt.Content
+	a.ContentType = evt.ContentType
 	return nil
 }
 

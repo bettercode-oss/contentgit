@@ -87,6 +87,24 @@ func TestContentAggregate_CreateContent(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, "test", sut.Content["name"])
 	})
+
+	t.Run("Content 생성 시 ContentType이 설정된다", func(t *testing.T) {
+		// given
+		aggregateId := uuid.New().String()
+		tenantId := "bettercode"
+		contentType := "Product"
+		content := map[string]any{"name": "test"}
+
+		sut, _ := NewContentAggregateWithType(aggregateId, tenantId, contentType)
+
+		// when
+		err := sut.CreateContent(context.Background(), content)
+
+		// then
+		assert.NoError(t, err)
+		assert.Equal(t, content, sut.Content)
+		assert.Equal(t, contentType, sut.ContentType)
+	})
 }
 
 func TestContentAggregate_UpdateField(t *testing.T) {
