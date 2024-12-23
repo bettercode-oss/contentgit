@@ -5,6 +5,7 @@ import "time"
 type ContentDetails struct {
 	Id            string                       `json:"id"`
 	Content       map[string]any               `json:"content"`
+	ContentType   string                       `json:"contentType"`
 	FieldChanges  []ContentDetailsFieldChange  `json:"fieldChanges"`
 	FieldComments []ContentDetailsFieldComment `json:"fieldComments"`
 	CreatedAt     time.Time                    `json:"createdAt"`
@@ -39,10 +40,11 @@ type ContentDetailsComment struct {
 }
 
 type ContentSummary struct {
-	Id        string         `json:"id"`
-	Content   map[string]any `json:"content"`
-	CreatedAt time.Time      `json:"createdAt"`
-	UpdatedAt time.Time      `json:"updatedAt"`
+	Id          string         `json:"id"`
+	Content     map[string]any `json:"content"`
+	ContentType string         `json:"contentType"`
+	CreatedAt   time.Time      `json:"createdAt"`
+	UpdatedAt   time.Time      `json:"updatedAt"`
 }
 
 type ContentUpdateField struct {

@@ -14,6 +14,7 @@ type CreateContentCommand struct {
 	TenantID    string         `json:"tenantId"`
 	AggregateID string         `json:"id"`
 	Content     map[string]any `json:"content"`
+	ContentType string         `json:"contentType"`
 }
 
 type createContentCmdHandler struct {
@@ -29,7 +30,7 @@ func (c *createContentCmdHandler) Handle(ctx context.Context, cmd CreateContentC
 		return content.ErrContentAlreadyExists
 	}
 
-	contentAggregate, err := content.NewContentAggregate(cmd.AggregateID, cmd.TenantID)
+	contentAggregate, err := content.NewContentAggregateWithType(cmd.AggregateID, cmd.TenantID, cmd.ContentType)
 	if err != nil {
 		return err
 	}

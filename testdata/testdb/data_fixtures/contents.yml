@@ -1,17 +1,20 @@
 - id: "074c7322-e7fa-4d5c-8938-8dbe0ce67465"
   tenant_id: "bettercode"
+  content_type: "products"
   content: {"name":"불스원샷","mainImage":"https://gdimg.gmarket.co.kr/2367233519/still/280?ver=1645526559","price":"250000","taxRate":"10.2"}
   version: 1
   updated_at: '1982-01-04 00:00'
   created_at: '1982-01-04 00:00'
 - id: "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd"
   tenant_id: "bettercode"
+  content_type: "products"
   content: {"name":"2024 최신형 공기 살균기","mainImage":"https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/5966707693/B.jpg?920000000","price":"3000","taxRate":"10.2","liveShowInventoryQuantity":"2000"}
   version: 6
   updated_at: '1982-01-07 00:00'
   created_at: '1982-01-07 00:00'
 - id: "03ab7edb-881b-49f8-848a-3e8266376ffe"
   tenant_id: "yuren"
+  content_type: "products"
   content: {"name":"링셀 수분 단백질 크림"}
   version: 1
   updated_at: '1982-01-04 00:00'
