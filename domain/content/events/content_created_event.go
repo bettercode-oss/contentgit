@@ -7,6 +7,7 @@ const (
 )
 
 type ContentCreatedEventV1 struct {
-	Content  map[string]any `json:"content"`
-	Metadata *string        `json:"-"`
+	Content     map[string]any `json:"content"`
+	ContentType string         `json:"contentType"`
+	Metadata    *string        `json:"-"`
 }

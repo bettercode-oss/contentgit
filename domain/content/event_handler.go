@@ -49,7 +49,14 @@ func (c *ContentEventHandler) onContentCreated(ctx context.Context, esEvent even
 		return errors.Wrapf(eventsourcing.ErrInvalidEventVersion, "type: %s, version: %d", esEvent.GetEventType(), esEvent.GetVersion())
 	}
 
-	contentProjection := projections.NewContentProjection(esEvent.AggregateID, esEvent.TenantId, event.Content, uint(esEvent.Version))
+	contentProjection := projections.NewContentProjection(
+		esEvent.AggregateID,
+		esEvent.TenantId,
+		event.Content,
+		event.ContentType,
+		uint(esEvent.Version),
+	)
+
 	if err := c.contentProjectRepository.Create(ctx, contentProjection); err != nil {
 		return errors.Wrap(err, "failed to create content projection")
 	}

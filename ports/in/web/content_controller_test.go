@@ -41,7 +41,7 @@ func (suite *ContentControllerTestSuite) TestCreateBulkContent() {
 		}
 	]`
 
-	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/contents/bulk", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/products/contents/bulk", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when
@@ -62,7 +62,7 @@ func (suite *ContentControllerTestSuite) TestCreateContent() {
 		"price": "250000",
 		"taxRate": "10.2"
 	}`
-	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/contents", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/products/contents", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when
@@ -76,7 +76,7 @@ func (suite *ContentControllerTestSuite) TestGetContent() {
 	// given
 	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
-	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents/6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/products/contents/6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd", nil)
 	rec := httptest.NewRecorder()
 
 	// when
@@ -98,6 +98,7 @@ func (suite *ContentControllerTestSuite) TestGetContent() {
 			"taxRate":                   "10.2",
 			"liveShowInventoryQuantity": "2000",
 		},
+		"contentType": "products",
 		"fieldComments": []any{
 			map[string]any{
 				"field": "price",
@@ -165,7 +166,7 @@ func (suite *ContentControllerTestSuite) TestGetContent_아이디에_해당하�
 	// given
 	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
-	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents/unknown-id", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/products/contents/unknown-id", nil)
 	rec := httptest.NewRecorder()
 
 	// when
@@ -179,7 +180,7 @@ func (suite *ContentControllerTestSuite) TestGetContents_페이징() {
 	// given
 	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
-	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents?page=1&pageSize=1", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/products/contents?page=1&pageSize=1", nil)
 	rec := httptest.NewRecorder()
 
 	// when
@@ -195,7 +196,8 @@ func (suite *ContentControllerTestSuite) TestGetContents_페이징() {
 	expected := map[string]any{
 		"result": []any{
 			map[string]any{
-				"id": "074c7322-e7fa-4d5c-8938-8dbe0ce67465",
+				"id":          "074c7322-e7fa-4d5c-8938-8dbe0ce67465",
+				"contentType": "products",
 				"content": map[string]any{
 					"name":      "불스원샷",
 					"mainImage": "https://gdimg.gmarket.co.kr/2367233519/still/280?ver=1645526559",
@@ -215,7 +217,7 @@ func (suite *ContentControllerTestSuite) TestGetContents_Sort_By_Desc_CreatedAt(
 	// given
 	sut := testserver.NewTestAppServerBuilder(Router{}, suite.TestDbContainer).WithDatabaseFixture().Build()
 
-	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/contents?page=1&pageSize=2&sortBy=desc(created_at)", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/tenants/bettercode/products/contents?page=1&pageSize=2&sortBy=desc(created_at)", nil)
 	rec := httptest.NewRecorder()
 
 	// when
@@ -231,7 +233,8 @@ func (suite *ContentControllerTestSuite) TestGetContents_Sort_By_Desc_CreatedAt(
 	expected := map[string]any{
 		"result": []any{
 			map[string]any{
-				"id": "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd",
+				"id":          "6f3bbc99-55aa-4340-89f6-1ddd4dfdb8cd",
+				"contentType": "products",
 				"content": map[string]any{
 					"name":                      "2024 최신형 공기 살균기",
 					"mainImage":                 "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/5966707693/B.jpg?920000000",
@@ -243,7 +246,8 @@ func (suite *ContentControllerTestSuite) TestGetContents_Sort_By_Desc_CreatedAt(
 				"updatedAt": "1982-01-07T00:00:00+09:00",
 			},
 			map[string]any{
-				"id": "074c7322-e7fa-4d5c-8938-8dbe0ce67465",
+				"id":          "074c7322-e7fa-4d5c-8938-8dbe0ce67465",
+				"contentType": "products",
 				"content": map[string]any{
 					"name":      "불스원샷",
 					"mainImage": "https://gdimg.gmarket.co.kr/2367233519/still/280?ver=1645526559",
@@ -270,7 +274,7 @@ func (suite *ContentControllerTestSuite) TestUpdateContentField() {
 			"createdByName": "사이트 관리자"
 		}`
 
-	req := httptest.NewRequest(http.MethodPut, "/api/tenants/bettercode/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/name", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPut, "/api/tenants/bettercode/products/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/name", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when
@@ -291,7 +295,7 @@ func (suite *ContentControllerTestSuite) TestUpdateContentField_Conflict_Field_V
 			"createdByName": "사이트 관리자"
 		}`
 
-	req := httptest.NewRequest(http.MethodPut, "/api/tenants/bettercode/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/name", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPut, "/api/tenants/bettercode/products/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/name", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when
@@ -312,7 +316,7 @@ func (suite *ContentControllerTestSuite) TestUpdateContentField_NotFound_Field()
 			"createdByName": "사이트 관리자"
 		}`
 
-	req := httptest.NewRequest(http.MethodPut, "/api/tenants/bettercode/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/unknownField", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPut, "/api/tenants/bettercode/products/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/unknownField", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when
@@ -332,7 +336,7 @@ func (suite *ContentControllerTestSuite) TestAddFieldComment() {
 			"createdByName": "사이트 관리자"
 		}`
 
-	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/name/comments", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/products/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/name/comments", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when
@@ -351,7 +355,7 @@ func (suite *ContentControllerTestSuite) TestAddFieldComment_NotFound_Field() {
 		"createdByName": "사이트 관리자"
 	}`
 
-	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/unknownField/comments", strings.NewReader(requestBody))
+	req := httptest.NewRequest(http.MethodPost, "/api/tenants/bettercode/products/contents/074c7322-e7fa-4d5c-8938-8dbe0ce67465/unknownField/comments", strings.NewReader(requestBody))
 	rec := httptest.NewRecorder()
 
 	// when

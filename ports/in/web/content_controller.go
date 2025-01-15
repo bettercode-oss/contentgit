@@ -33,7 +33,7 @@ func NewContentController(rg *gin.RouterGroup, contentService *appservices.Conte
 }
 
 func (controller ContentController) MapRoutes() {
-	route := controller.routerGroup.Group("/tenants/:tenantId/contents")
+	route := controller.routerGroup.Group("/tenants/:tenantId/:contentType/contents")
 	route.POST("bulk", controller.createBulkContents)
 	route.POST("", controller.createContent)
 	route.GET("", controller.getContents)
@@ -44,8 +44,9 @@ func (controller ContentController) MapRoutes() {
 
 func (controller ContentController) createBulkContents(ctx *gin.Context) {
 	tenantId := ctx.Param("tenantId")
-	if len(tenantId) == 0 {
-		ctx.JSON(http.StatusBadRequest, "tenantId is required")
+	contentType := ctx.Param("contentType")
+	if len(tenantId) == 0 || len(contentType) == 0 {
+		ctx.JSON(http.StatusBadRequest, "tenantId and contentType are required")
 		return
 	}
 
@@ -62,6 +63,7 @@ func (controller ContentController) createBulkContents(ctx *gin.Context) {
 				TenantID:    tenantId,
 				AggregateID: uuid.New().String(),
 				Content:     c.(map[string]any),
+				ContentType: contentType,
 			}
 
 			err := controller.contentService.Commands.CreateContent.Handle(ctx, command)
@@ -83,8 +85,9 @@ func (controller ContentController) createBulkContents(ctx *gin.Context) {
 
 func (controller ContentController) createContent(ctx *gin.Context) {
 	tenantId := ctx.Param("tenantId")
-	if len(tenantId) == 0 {
-		ctx.JSON(http.StatusBadRequest, "tenantId is required")
+	contentType := ctx.Param("contentType")
+	if len(tenantId) == 0 || len(contentType) == 0 {
+		ctx.JSON(http.StatusBadRequest, "tenantId and contentType are required")
 		return
 	}
 
@@ -100,6 +103,7 @@ func (controller ContentController) createContent(ctx *gin.Context) {
 			TenantID:    tenantId,
 			AggregateID: uuid.New().String(),
 			Content:     content.(map[string]any),
+			ContentType: contentType,
 		}
 
 		return controller.contentService.Commands.CreateContent.Handle(ctx, command)
@@ -137,10 +141,11 @@ func (controller ContentController) getContent(ctx *gin.Context) {
 	}
 
 	contentDetails := dtos.ContentDetails{
-		Id:        contentProjection.Id,
-		Content:   contentProjection.Content,
-		CreatedAt: contentProjection.CreatedAt,
-		UpdatedAt: contentProjection.UpdatedAt,
+		Id:          contentProjection.Id,
+		Content:     contentProjection.Content,
+		ContentType: contentProjection.ContentType,
+		CreatedAt:   contentProjection.CreatedAt,
+		UpdatedAt:   contentProjection.UpdatedAt,
 	}
 
 	contentDetails.FieldComments = make([]dtos.ContentDetailsFieldComment, 0)
@@ -218,10 +223,11 @@ func (controller ContentController) getContents(ctx *gin.Context) {
 	contentSummaries := make([]dtos.ContentSummary, 0)
 	for _, contentEntity := range contentProjections {
 		contentSummaries = append(contentSummaries, dtos.ContentSummary{
-			Id:        contentEntity.Id,
-			Content:   contentEntity.Content,
-			CreatedAt: contentEntity.CreatedAt,
-			UpdatedAt: contentEntity.UpdatedAt,
+			Id:          contentEntity.Id,
+			Content:     contentEntity.Content,
+			ContentType: contentEntity.ContentType,
+			CreatedAt:   contentEntity.CreatedAt,
+			UpdatedAt:   contentEntity.UpdatedAt,
 		})
 	}
 
